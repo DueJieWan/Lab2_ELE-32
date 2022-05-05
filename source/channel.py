@@ -6,5 +6,9 @@ class Channel:
         self.error_probability = p
 
     def transmit(self, msg: np.ndarray) -> np.ndarray:
-        corrupted = np.random.rand(*msg.shape) < self.error_probability
-        return np.logical_xor(msg, corrupted)
+        i: int = 0
+        while i < msg.shape[0]:
+            corrupted = np.random.rand(*msg[i].shape) < self.error_probability
+            msg[i] += corrupted
+            i += 1
+        return msg % 2

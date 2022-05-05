@@ -1,12 +1,13 @@
 import numpy as np
+import numpy.polynomial.polynomial as poly
 import pandas as pd
 import timeit as tm
 from system import System
 from ploting import plot_graph
 
 
-def generate_bits(n_messages: int = 250_000, message_length: int = 4):
-    return np.random.randint(0, 2, (n_messages, message_length))
+def generate_bits(n_bits: int = 1_000_000, message_length: int = 4):
+    return np.random.randint(0, 2, (np.floor(n_bits / message_length), message_length))
 
 
 def calculate_bit_error_probability(original_msg: np.ndarray, decoded_msg: np.ndarray):
